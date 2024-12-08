@@ -38,7 +38,9 @@ def handleClient(conn, addr):
             if x[0]=="user":
                 connectedUsers.append(x[1])
                 ipToUser[addr[0]]=x[1]
-            if msg==DISCONNECT_MSG:
+            elif x[0]=="buy":
+                print("bought")
+            elif msg==DISCONNECT_MSG:
                 connected=False
                 print(f"[DISCONNECT] {addr} disconnected :(")
                 name=ipToUser[addr[0]]
