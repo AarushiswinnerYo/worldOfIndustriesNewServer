@@ -1,0 +1,65 @@
+import socket
+import threading
+import os
+HEADER=64
+PORT=5555
+SERVER="0.0.0.0"
+ADDR=(SERVER, PORT)
+FORMAT='utf-8'
+DISCONNECT_MSG="!disconnect"
+
+connectedUsers=[]
+
+ipToUser={}
+
+def cscreen():
+    os.system("clear")
+    print(f"[ACTIVE THREADS] {len(connectedUsers)}")
+    print("Users online:")
+    for i in connectedUsers:
+        print(i)
+
+server=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+server.bind(ADDR)
+
+def handleClient(conn, addr):
+    print(f"[NEW CONNECTION] {addr} has joined the server!")
+    print({addr[0]})
+    connected=True
+    while connected:
+        cscreen()
+        msg_len=conn.recv(HEADER).decode(FORMAT)
+        if msg_len:
+            msg_len=int(msg_len)
+            msg=conn.recv(msg_len).decode(FORMAT)
+            x=msg.split("-")
+            print(x)
+            if x[0]=="user":
+                connectedUsers.append(x[1])
+                ipToUser[addr[0]]=x[1]
+            if msg==DISCONNECT_MSG:
+                connected=False
+                print(f"[DISCONNECT] {addr} disconnected :(")
+                name=ipToUser[addr[0]]
+                nameIndex=connectedUsers.index(name)
+                connectedUsers.pop(nameIndex)
+                cscreen()
+            else:
+                print(f"[{addr}] {msg}")
+    conn.close()
+
+def start():
+    global thread
+    server.listen()
+    print(f"[LISTEN] Listening on {server.getsockname()}")
+    while True:
+        cscreen()
+        conn, addr=server.accept()
+        thread=threading.Thread(target=handleClient, args=(conn, addr))
+        thread.start()
+        print(f"[ACTIVE THREADS] {threading.active_count()-1}")
+
+
+print("[STARTING] Starting Server...")
+start()
