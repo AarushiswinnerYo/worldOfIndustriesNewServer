@@ -46,7 +46,7 @@ def handleClient(conn, addr):
                 connectedUsers.pop(nameIndex)
                 cscreen()
                 conn.send(f"Disconnecting user...{ipToUser[addr[0]]}".encode(FORMAT))
-                print(f"\033[31m{ipToUser[addr[0]} disconnected :(\033[0m")
+                print(f"\033[31m{ipToUser[addr[0]]} disconnected :(\033[0m")
             else:
                 print(f"\033[32m[{addr}] {msg}\033[0m")
                 conn.send(f"{msg} received".encode(FORMAT))
