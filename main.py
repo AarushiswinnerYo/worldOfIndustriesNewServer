@@ -38,8 +38,9 @@ def handleClient(conn, addr):
             if x[0]=="user":
                 connectedUsers.append(x[1])
                 ipToUser[addr[0]]=x[1]
+                conn.send(f"Handshake Made with user:- {x[1]}".encode(FORMAT))
             elif x[0]=="buy":
-                print("bought")
+                conn.send("bought".encode(FORMAT))
             elif msg==DISCONNECT_MSG:
                 connected=False
                 print(f"[DISCONNECT] {addr} disconnected :(")
@@ -47,8 +48,10 @@ def handleClient(conn, addr):
                 nameIndex=connectedUsers.index(name)
                 connectedUsers.pop(nameIndex)
                 cscreen()
+                conn.send("DISCONNECTED".encode(FORMAT))
             else:
                 print(f"[{addr}] {msg}")
+                conn.send(f"{msg} received".encode(FORMAT))
     conn.close()
 
 def start():
