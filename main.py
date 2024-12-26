@@ -13,6 +13,7 @@ connectedUsers=[]
 ipToUser={}
 
 def cscreen():
+    os.environ['TERM'] = 'xterm'
     os.system("clear")
     print(f"\033[32m[ACTIVE THREADS] {len(connectedUsers)}\033[0m")
     print("\033[32mUsers online:\033[0m")
