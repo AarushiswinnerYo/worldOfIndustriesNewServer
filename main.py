@@ -24,8 +24,6 @@ server=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind(ADDR)
 
 def handleClient(conn, addr):
-    print(f"[NEW CONNECTION] {addr} has joined the server!")
-    print({addr[0]})
     connected=True
     while connected:
         cscreen()
@@ -34,16 +32,15 @@ def handleClient(conn, addr):
             msg_len=int(msg_len)
             msg=conn.recv(msg_len).decode(FORMAT)
             x=msg.split("-")
-            print(x)
             if x[0]=="user":
                 connectedUsers.append(x[1])
                 ipToUser[addr[0]]=x[1]
+                print(f"{x[1] Joined the Chat! (Game that is...)")
                 conn.send(f"Handshake Made with user:- {x[1]}".encode(FORMAT))
             elif x[0]=="buy":
                 conn.send("bought".encode(FORMAT))
             elif msg==DISCONNECT_MSG:
                 connected=False
-                print(f"[DISCONNECT] {addr} disconnected :(")
                 name=ipToUser[addr[0]]
                 nameIndex=connectedUsers.index(name)
                 connectedUsers.pop(nameIndex)
