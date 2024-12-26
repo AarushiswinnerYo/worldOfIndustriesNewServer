@@ -14,10 +14,10 @@ ipToUser={}
 
 def cscreen():
     os.system("clear")
-    print(f"[ACTIVE THREADS] {len(connectedUsers)}")
-    print("Users online:")
+    print(f"\033[32m[ACTIVE THREADS] {len(connectedUsers)}\033[0m")
+    print("\033[32mUsers online:\033[0m")
     for i in connectedUsers:
-        print(i)
+        print(f"\033[32m{i}\033[0m")
 
 server=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -35,7 +35,7 @@ def handleClient(conn, addr):
             if x[0]=="user":
                 connectedUsers.append(x[1])
                 ipToUser[addr[0]]=x[1]
-                print(f"{x[1]} Joined the Chat! (Game that is...)")
+                print(f"\033[32m{x[1]} Joined the Chat! (Game that is...)\033[0m")
                 conn.send(f"Handshake Made with user:- {x[1]}".encode(FORMAT))
             elif x[0]=="buy":
                 conn.send("bought".encode(FORMAT))
@@ -46,8 +46,9 @@ def handleClient(conn, addr):
                 connectedUsers.pop(nameIndex)
                 cscreen()
                 conn.send(f"Disconnecting user...{ipToUser[addr[0]]}".encode(FORMAT))
+                print(f"\033[31m{ipToUser[addr[0]} disconnected :(\033[0m")
             else:
-                print(f"[{addr}] {msg}")
+                print(f"\033[32m[{addr}] {msg}\033[0m")
                 conn.send(f"{msg} received".encode(FORMAT))
     conn.close()
 
