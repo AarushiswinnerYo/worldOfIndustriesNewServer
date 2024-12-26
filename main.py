@@ -35,7 +35,7 @@ def handleClient(conn, addr):
             if x[0]=="user":
                 connectedUsers.append(x[1])
                 ipToUser[addr[0]]=x[1]
-                print(f"{x[1] Joined the Chat! (Game that is...)")
+                print(f"{x[1]} Joined the Chat! (Game that is...)")
                 conn.send(f"Handshake Made with user:- {x[1]}".encode(FORMAT))
             elif x[0]=="buy":
                 conn.send("bought".encode(FORMAT))
