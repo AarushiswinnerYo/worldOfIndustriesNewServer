@@ -37,19 +37,21 @@ def handleClient(conn, addr):
             if x[0]=="signup":
                 signRes=functions.signUp(x[1],x[2])
                 if signRes=="Done!":
-                    conn.send("User signed up successfully".encode(FORMAT))
+                    conn.send("User signed up successfully")
                     print(f"\033[32mUser:-{x[1]} up successfully\033[0m")
                 else:
-                    conn.send("Exists".encode(FORMAT))
+                    conn.send("Exists")
             elif x[0]=="login":
                 loginRes=functions.login(x[1],x[2])
                 if loginRes=="correct":
-                    conn.send("Successfully logged in!".encode(FORMAT))
+                    conn.send("Successfully logged in!")
                     print(f"\033[32mUser:-{x[1]} logged on\033[0m")
                 elif loginRes=="User not found!":
-                    conn.send("Non-existent".encode(FORMAT))
+                    conn.send("Non-existent")
+                    connected=False
+                    print(f"{x[1]} tried to login but never existed")
                 else:
-                    conn.sent("Incorrect password".encode(FORMAT))
+                    conn.sent("Incorrect password")
             elif x[0]=="user":
                 connectedUsers.append(x[1])
                 ipToUser[addr[0]]=x[1]
