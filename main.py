@@ -1,6 +1,5 @@
 import socket
 import threading
-from pymongo import MongoClient
 import os
 import functions
 HEADER=64
@@ -11,18 +10,6 @@ FORMAT='utf-8'
 DISCONNECT_MSG="!disconnect"
 
 connectedUsers=[]
-
-cluster="mongodb://mongo:WNsrSjDuaLpLoKAMZosADdAHTbhJrZFG@autorack.proxy.rlwy.net:42448/?retryWrites=true&w=majority"
-client=MongoClient(cluster)
-
-print(client.list_database_names())
-db=client.Users
-print(db.list_collection_names())
-
-test={"Winner":"a"}
-profs=db.profiles
-
-res=profs.insert_one(test)
 ipToUser={}
 
 def cscreen():
