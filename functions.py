@@ -44,4 +44,6 @@ def login(user, passwd):
             print(type(profs.distinct(user)))
             return "correct!"
         else:
+            print(profs.distinct(user))
+            print(type(profs.distinct(user)))
             return "incorrect!"

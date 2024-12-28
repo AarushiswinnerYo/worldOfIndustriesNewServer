@@ -50,7 +50,7 @@ def handleClient(conn, addr):
                     conn.send("Non-existent".encode(FORMAT))
                     connected=False
                     print(f"{x[1]} tried to login but never existed")
-                else:
+                elif loginRes=="incorrect!":
                     conn.send("Incorrect password".encode(FORMAT))
                     connected=False
             elif x[0]=="user":
