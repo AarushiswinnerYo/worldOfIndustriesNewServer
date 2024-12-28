@@ -18,6 +18,11 @@ client=MongoClient(cluster)
 print(client.list_database_names())
 db=client.Users
 print(db.list_collection_names())
+
+test={"Winner":"a"}
+profs=db.profiles
+
+res=profs.insert_one(test)
 ipToUser={}
 
 def cscreen():
