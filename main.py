@@ -15,9 +15,9 @@ connectedUsers=[]
 cluster="mongodb://mongo:WNsrSjDuaLpLoKAMZosADdAHTbhJrZFG@mongodb.railway.internal:27017/Users?retryWrites=true&w=majority"
 client=MongoClient(cluster)
 
-print(client.list_database_names)
+print(client.list_database_names())
 db=client.Users
-print(db.list_collection_names)
+print(db.list_collection_names())
 ipToUser={}
 
 def cscreen():
