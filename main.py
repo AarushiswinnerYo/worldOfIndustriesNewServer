@@ -12,7 +12,7 @@ DISCONNECT_MSG="!disconnect"
 
 connectedUsers=[]
 
-cluster="mongodb+srv://mongo:WNsrSjDuaLpLoKAMZosADdAHTbhJrZFG@mongodb.railway.internal/Users?retryWrites=true&w=majority"
+cluster="mongodb://mongo:WNsrSjDuaLpLoKAMZosADdAHTbhJrZFG@autorack.proxy.rlwy.net:42448/?retryWrites=true&w=majority"
 client=MongoClient(cluster)
 
 print(client.list_database_names())
