@@ -18,7 +18,7 @@ def signUp(user, passwd):
            "plastic":0,
            "money":10000}
         l=profs.insert_one(c)
-        lists.insert_one({"material":[]})
+        lists.insert_one({user:[]})
         return "Done!"
     else:
         return "User exists!"
