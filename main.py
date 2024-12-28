@@ -1,6 +1,7 @@
 import socket
 import threading
 import os
+import functions
 HEADER=64
 PORT=5555
 SERVER="0.0.0.0"
@@ -33,7 +34,23 @@ def handleClient(conn, addr):
             msg_len=int(msg_len)
             msg=conn.recv(msg_len).decode(FORMAT)
             x=msg.split("-")
-            if x[0]=="user":
+            if x[0]=="signup":
+                signRes=functions.signUp(x[1],x[2])
+                if signRes=="Done!":
+                    conn.send("User signed up successfully")
+                    print(f"\033[32mUser:-{x[1]} up successfully\033[0m")
+                else:
+                    conn.send("Exists")
+            elif x[0]=="login":
+                loginRes=functions.login(x[1],x[2])
+                if loginRes=="correct":
+                    conn.send("Successfully logged in!")
+                    print(f"\033[32mUser:-{x[1]} logged on\033[0m")
+                elif loginRes=="User not found!":
+                    conn.send("Non-existent")
+                else:
+                    conn.sent("Incorrect password")
+            elif x[0]=="user":
                 connectedUsers.append(x[1])
                 ipToUser[addr[0]]=x[1]
                 print(f"\033[32m{x[1]} Joined the Chat! (Game that is...)\033[0m")
