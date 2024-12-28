@@ -43,7 +43,7 @@ def handleClient(conn, addr):
                     connected=False
             elif x[0]=="login":
                 loginRes=functions.login(x[1],x[2])
-                if loginRes=="correct":
+                if loginRes=="correct!":
                     conn.send("Successfully logged in!".encode(FORMAT))
                     print(f"\033[32mUser:-{x[1]} logged on\033[0m")
                 elif loginRes=="User not found!":
