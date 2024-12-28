@@ -40,6 +40,8 @@ def login(user, passwd):
         return "User not found!"
     else:
         if profs.distinct(user)==passwd:
+            print(profs.distinct(user))
+            print(type(profs.distinct(user)))
             return "correct!"
         else:
             return "incorrect!"
