@@ -1,5 +1,6 @@
 import socket
 import threading
+from pymongo import MongoClient
 import os
 import functions
 HEADER=64
@@ -11,6 +12,12 @@ DISCONNECT_MSG="!disconnect"
 
 connectedUsers=[]
 
+cluster="mongodb://mongo:WNsrSjDuaLpLoKAMZosADdAHTbhJrZFG@mongodb.railway.internal:27017/Users?retryWrites=true&w=majority"
+client=MongoClient(cluster)
+
+print(client.list_database_names)
+db=client.Users
+print(db.list_collection_names)
 ipToUser={}
 
 def cscreen():
@@ -51,7 +58,7 @@ def handleClient(conn, addr):
                     connected=False
                     print(f"{x[1]} tried to login but never existed")
                 else:
-                    conn.send("Incorrect password".encode(FORMAT))
+                    conn.sent("Incorrect password".encode(FORMAT))
             elif x[0]=="user":
                 connectedUsers.append(x[1])
                 ipToUser[addr[0]]=x[1]
