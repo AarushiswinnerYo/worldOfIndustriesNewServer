@@ -51,7 +51,7 @@ def handleClient(conn, addr):
                     connected=False
                     print(f"{x[1]} tried to login but never existed")
                 else:
-                    conn.sent("Incorrect password".encode(FORMAT))
+                    conn.send("Incorrect password".encode(FORMAT))
             elif x[0]=="user":
                 connectedUsers.append(x[1])
                 ipToUser[addr[0]]=x[1]
