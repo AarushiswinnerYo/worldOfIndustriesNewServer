@@ -2,7 +2,7 @@ import os
 import ast
 import pickle
 from pymongo import MongoClient
-cluster="mongodb://mongo:WNsrSjDuaLpLoKAMZosADdAHTbhJrZFG@autorack.proxy.rlwy.net:42448/?retryWrites=true&w=majority"
+cluster="mongodb://192.168.29.178/?directConnection=true"
 client=MongoClient(cluster)
 db=client.Users
 profs=db.profiles
